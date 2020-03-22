@@ -28,7 +28,7 @@ installed on your system, you can just run `./pytkr.py`.
 
 If not, you might benefit from running it in a virtual environment.  To
 do that, run `make` to create the virtual environment and use the
-`pytkr.sh` script to run it. Use `make clean` to get rid of it.
+`./pytkr.sh` script to run it. Use `make clean` to get rid of it.
 
 ## Usage
 
@@ -55,7 +55,5 @@ Pressing `q` or `CTRL+C` quits the program.
 ## Meta
 
 Curt McDowell \<coder#fishlet,com\>
-
-License: none
 
 Source: https://github.com/curtmcd/pytkr
