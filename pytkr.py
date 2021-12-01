@@ -7,9 +7,11 @@ import getopt
 from tkinter import *
 from tkinter import font
 
-import yahoo
+#import qs_yahoo_bs as quote_service
+import qs_yahoo_js as quote_service
 
-NAMES_DEFAULT = ['^DJI', '^IXIC', 'PSTG', 'DNP', 'AAL']
+#NAMES_DEFAULT = ['^DJI', '^IXIC', 'PSTG', 'DNP', 'AAL']
+NAMES_DEFAULT = ['^DJI', 'GOOG', 'VIAC', 'HD', 'AAL', 'CCL']
 
 # Update interval is pretty long by default.
 # Careful when speeding it up, lest the quote service cuts us off.
@@ -72,7 +74,7 @@ class Symbol:
         self.pct = 0
     def update(self):
         print('update %s' % self.name)
-        self.last, self.change, self.pct = yahoo.quote(self.name)
+        self.last, self.change, self.pct = quote_service.quote(self.name)
 
 class App:
     def __init__(self, symbols, titlebar=True):

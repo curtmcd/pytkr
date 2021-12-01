@@ -1,5 +1,6 @@
 # Retrieve stock quote by scraping Yahoo user interface page.
 # Amazingly, this fragile method has held up since 2016 (as of 2020-03-20).
+# Update: broke in July 2020 due to minor formatting change.
 
 from bs4 import BeautifulSoup
 
@@ -38,16 +39,15 @@ def quote(symbol):
     try:
         header_info = soup.select('div[id="quote-header-info"]')[0]
         divs = header_info.findAll('div', recursive=False)
-        quote_block_parent = divs[2]
-        divs = quote_block_parent.findAll('div', recursive=False)
-        quote_block = divs[0]
-        spans = quote_block.findAll('span', recursive=False)
+        block = divs[2]
+        divs = block.findAll('div', recursive=False)
+        block = divs[0]
+        divs = block.findAll('div', recursive=False)
+        block = divs[0]
+        spans = block.findAll('span', recursive=False)
         quote = re.sub(r',', r'', spans[0].text)
         price_usd = float(quote.replace(',', ''))
-        divs = quote_block.findAll('div', recursive=False)
-        change_block = divs[0]
-        spans = change_block.findAll('span', recursive=False)
-        change_str = spans[0].text.replace(',', '').replace('+', '')
+        change_str = spans[1].text.replace(',', '').replace('+', '')
         m = re.match(r'([-.0-9]+) \(([-.0-9]+)%\)', change_str)
         change_usd, change_pct = float(m.group(1)), float(m.group(2))
     except Exception as e:
